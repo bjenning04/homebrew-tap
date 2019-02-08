@@ -42,7 +42,6 @@ class Ffmpeg < Formula
   depends_on "opencore-amr"
   depends_on "openh264"
   depends_on "openjpeg"
-  depends_on "openssl"
   depends_on "opus"
   depends_on "rtmpdump"
   depends_on "rubberband"
@@ -94,7 +93,6 @@ class Ffmpeg < Formula
       --enable-libopencore-amrwb
       --enable-libopenh264
       --enable-libopenjpeg
-      --enable-openssl
       --enable-libopus
       --enable-librsvg
       --enable-librtmp
