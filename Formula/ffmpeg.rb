@@ -124,8 +124,6 @@ class Ffmpeg < Formula
       --disable-libjack
       --disable-indev=jack
     ]
-    
-    args << "--enable-opencl" if MacOS.version > :lion
 
     system "./configure", *args
     system "make", "install"
