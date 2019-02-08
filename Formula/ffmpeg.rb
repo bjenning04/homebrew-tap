@@ -3,86 +3,64 @@ class Ffmpeg < Formula
   homepage "https://ffmpeg.org/"
   url "https://ffmpeg.org/releases/ffmpeg-4.1.tar.xz"
   sha256 "a38ec4d026efb58506a99ad5cd23d5a9793b4bf415f2c4c2e9c1bb444acd1994"
-  revision 1
+  revision 6
   head "https://github.com/FFmpeg/FFmpeg.git"
 
   bottle do
-    sha256 "b5768a085fcbd0515e0be2b08896780b060ade54e4f2472dfa5ef234b180c7f6" => :mojave
-    sha256 "7259051adf56ca05922881b1189863f1f2c6ccce3c61a59b1d8f1336a598c75d" => :high_sierra
-    sha256 "2e48a23ff807683a78b1792101e39a39cf6ace0e525afefe7109beb421c19034" => :sierra
+    rebuild 1
+    sha256 "2ae4ad63780832d050b2e53eeee92f5a9b97ddc397f06f7e0ba3e97f3c3e340d" => :mojave
+    sha256 "9f24f59ce1bce690a874492e5338753cdcd3b32f56e48d454380b32fefed7668" => :high_sierra
+    sha256 "4340e549ef8d9e2062f8e14a696626e834252fe95a7d6012a04ee4a22862ed0f" => :sierra
   end
-
-  option "with-chromaprint", "Enable the Chromaprint audio fingerprinting library"
-  option "with-fdk-aac", "Enable the Fraunhofer FDK AAC library"
-  option "with-libass", "Enable ASS/SSA subtitle format"
-  option "with-librsvg", "Enable SVG files as inputs via librsvg"
-  option "with-libsoxr", "Enable the soxr resample library"
-  option "with-libssh", "Enable SFTP protocol via libssh"
-  option "with-tesseract", "Enable the tesseract OCR engine"
-  option "with-libvidstab", "Enable vid.stab support for video stabilization"
-  option "with-opencore-amr", "Enable Opencore AMR NR/WB audio format"
-  option "with-openh264", "Enable OpenH264 library"
-  option "with-openjpeg", "Enable JPEG 2000 image format"
-  option "with-openssl", "Enable SSL support"
-  option "with-rtmpdump", "Enable RTMP protocol"
-  option "with-rubberband", "Enable rubberband library"
-  option "with-webp", "Enable using libwebp to encode WEBP images"
-  option "with-zeromq", "Enable using libzeromq to receive commands sent through a libzeromq client"
-  option "with-zimg", "Enable z.lib zimg library"
-  option "with-srt", "Enable SRT library"
-  option "with-libvmaf", "Enable libvmaf scoring library"
-  option "with-aom", "Enable AV1 video codec"
-
-  deprecated_option "with-libtesseract" => "with-tesseract"
 
   depends_on "nasm" => :build
   depends_on "pkg-config" => :build
   depends_on "texi2html" => :build
 
+  depends_on "aom"
+  depends_on "chromaprint"
+  depends_on "fdk-aac"
   depends_on "fontconfig"
   depends_on "freetype"
+  depends_on "frei0r"
+  depends_on "game-music-emu"
+  depends_on "gnutls"
   depends_on "lame"
+  depends_on "libass"
+  depends_on "libbluray"
+  depends_on "libbs2b"
+  depends_on "libcaca"
+  depends_on "libgsm"
+  depends_on "libmodplug"
+  depends_on "librsvg"
+  depends_on "libsoxr"
+  depends_on "libssh"
+  depends_on "libvidstab"
+  depends_on "libvmaf"
   depends_on "libvorbis"
   depends_on "libvpx"
+  depends_on "opencore-amr"
+  depends_on "openh264"
+  depends_on "openjpeg"
+  depends_on "openssl"
   depends_on "opus"
+  depends_on "rtmpdump"
+  depends_on "rubberband"
   depends_on "sdl2"
   depends_on "snappy"
+  depends_on "speex"
+  depends_on "srt"
+  depends_on "tesseract"
   depends_on "theora"
+  depends_on "two-lame"
+  depends_on "wavpack"
+  depends_on "webp"
   depends_on "x264"
   depends_on "x265"
   depends_on "xvid"
   depends_on "xz"
-
-  depends_on "aom" => :optional
-  depends_on "chromaprint" => :optional
-  depends_on "fdk-aac" => :optional
-  depends_on "frei0r" => :optional
-  depends_on "game-music-emu" => :optional
-  depends_on "libass" => :optional
-  depends_on "libbluray" => :optional
-  depends_on "libbs2b" => :optional
-  depends_on "libcaca" => :optional
-  depends_on "libgsm" => :optional
-  depends_on "libmodplug" => :optional
-  depends_on "librsvg" => :optional
-  depends_on "libsoxr" => :optional
-  depends_on "libssh" => :optional
-  depends_on "libvidstab" => :optional
-  depends_on "libvmaf" => :optional
-  depends_on "opencore-amr" => :optional
-  depends_on "openh264" => :optional
-  depends_on "openjpeg" => :optional
-  depends_on "openssl" => :optional
-  depends_on "rtmpdump" => :optional
-  depends_on "rubberband" => :optional
-  depends_on "speex" => :optional
-  depends_on "srt" => :optional
-  depends_on "tesseract" => :optional
-  depends_on "two-lame" => :optional
-  depends_on "wavpack" => :optional
-  depends_on "webp" => :optional
-  depends_on "zeromq" => :optional
-  depends_on "zimg" => :optional
+  depends_on "zeromq"
+  depends_on "zimg"
 
   def install
     args = %W[
@@ -95,63 +73,59 @@ class Ffmpeg < Formula
       --cc=#{ENV.cc}
       --host-cflags=#{ENV.cflags}
       --host-ldflags=#{ENV.ldflags}
+      --enable-chromaprint
       --enable-ffplay
+      --enable-frei0r
+      --enable-gnutls
       --enable-gpl
+      --enable-libaom
+      --enable-libass
+      --enable-libbluray
+      --enable-libbs2b
+      --enable-libcaca
+      --enable-libfdk-aac
       --enable-libfontconfig
       --enable-libfreetype
+      --enable-libgme
+      --enable-libgsm
+      --enable-libmodplug
       --enable-libmp3lame
+      --enable-libopencore-amrnb
+      --enable-libopencore-amrwb
+      --enable-libopenh264
+      --enable-libopenjpeg
+      --enable-openssl
       --enable-libopus
+      --enable-librsvg
+      --enable-librtmp
+      --enable-librubberband
       --enable-libsnappy
+      --enable-libsoxr
+      --enable-libspeex
+      --enable-libsrt
+      --enable-libssh
+      --enable-libtesseract
       --enable-libtheora
+      --enable-libtwolame
+      --enable-libvidstab
+      --enable-libvmaf
       --enable-libvorbis
       --enable-libvpx
+      --enable-libwavpack
+      --enable-libwebp
       --enable-libx264
       --enable-libx265
       --enable-libxvid
+      --enable-libzimg
+      --enable-libzmq
       --enable-lzma
+      --enable-nonfree
+      --enable-videotoolbox
+      --disable-libjack
+      --disable-indev=jack
     ]
-
-    args << "--enable-chromaprint" if build.with? "chromaprint"
-    args << "--enable-frei0r" if build.with? "frei0r"
-    args << "--enable-libaom" if build.with? "aom"
-    args << "--enable-libass" if build.with? "libass"
-    args << "--enable-libbluray" if build.with? "libbluray"
-    args << "--enable-libbs2b" if build.with? "libbs2b"
-    args << "--enable-libcaca" if build.with? "libcaca"
-    args << "--enable-libfdk-aac" if build.with? "fdk-aac"
-    args << "--enable-libgme" if build.with? "game-music-emu"
-    args << "--enable-libgsm" if build.with? "libgsm"
-    args << "--enable-libmodplug" if build.with? "libmodplug"
-    args << "--enable-libopencore-amrnb" << "--enable-libopencore-amrwb" if build.with? "opencore-amr"
-    args << "--enable-libopenh264" if build.with? "openh264"
-    args << "--enable-librsvg" if build.with? "librsvg"
-    args << "--enable-librtmp" if build.with? "rtmpdump"
-    args << "--enable-librubberband" if build.with? "rubberband"
-    args << "--enable-libsoxr" if build.with? "libsoxr"
-    args << "--enable-libspeex" if build.with? "speex"
-    args << "--enable-libsrt" if build.with? "srt"
-    args << "--enable-libssh" if build.with? "libssh"
-    args << "--enable-libtesseract" if build.with? "tesseract"
-    args << "--enable-libtwolame" if build.with? "two-lame"
-    args << "--enable-libvidstab" if build.with? "libvidstab"
-    args << "--enable-libvmaf" if build.with? "libvmaf"
-    args << "--enable-libwavpack" if build.with? "wavpack"
-    args << "--enable-libwebp" if build.with? "webp"
-    args << "--enable-libzimg" if build.with? "zimg"
-    args << "--enable-libzmq" if build.with? "zeromq"
+    
     args << "--enable-opencl" if MacOS.version > :lion
-    args << "--enable-openssl" if build.with? "openssl"
-    args << "--enable-videotoolbox" if MacOS.version >= :mountain_lion
-
-    if build.with? "openjpeg"
-      args << "--enable-libopenjpeg"
-      args << "--disable-decoder=jpeg2000"
-      args << "--extra-cflags=" + `pkg-config --cflags libopenjp2`.chomp
-    end
-
-    # These librares are GPL-incompatible, and require ffmpeg be built with
-    # the "--enable-nonfree" flag, which produces unredistributable libraries
-    args << "--enable-nonfree" if build.with?("fdk-aac") || build.with?("openssl")
 
     system "./configure", *args
     system "make", "install"
