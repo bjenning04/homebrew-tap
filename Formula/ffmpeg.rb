@@ -1,16 +1,16 @@
 class Ffmpeg < Formula
   desc "Play, record, convert, and stream audio and video"
   homepage "https://ffmpeg.org/"
-  url "https://ffmpeg.org/releases/ffmpeg-4.1.2.tar.xz"
-  sha256 "b95f0ae44798ab1434155ac7f81f30a7e9760a02282e4b5898372c22a335347b"
-  revision 6
+  url "https://ffmpeg.org/releases/ffmpeg-4.1.3.tar.xz"
+  sha256 "0c3020452880581a8face91595b239198078645e7d7184273b8bcc7758beb63d"
+  revision 1
   head "https://github.com/FFmpeg/FFmpeg.git"
 
   bottle do
     rebuild 1
-    sha256 "7f28b84fb27377fdb34494f4272b8fd349dec1b3d1561b718b90b9d22debc7d4" => :mojave
-    sha256 "15b520f1ab352265733eff7def79084b7506716f9d73fc00278daf18e44f0b44" => :high_sierra
-    sha256 "91aed78eb88a59409dabcfb844d9f7107b0b8cab44ac47a2b8c722d32533a81d" => :sierra
+    sha256 "ddfb58dd5432eed657d9ecda3b4c2f06eb523815e9e7f339b1f05d1048f89d40" => :mojave
+    sha256 "41dd2796b2c3136faf6d5b20e1f7774db2c21a916c1b9d752e1ea4c92ff32f22" => :high_sierra
+    sha256 "3904c3b313c0a53349b2bd3a0e27b503b5448f81b319c313ee48ef80492bf5dd" => :sierra
   end
 
   depends_on "nasm" => :build
